@@ -2,6 +2,7 @@ from time import perf_counter
 
 from components import read_from_file, print_solution
 from bruteforce import bruteforce
+from dynamic import dynamic_costonly
 from config import INPUT_DIRECTORY, INPUT_FILE
 
 
@@ -12,6 +13,10 @@ def perform_algorithms():
     bruteforce_enjoyment, bruteforce_solution = bruteforce(0, time_budget, cost_budget, [], activities)
     bruteforce_end_time = perf_counter()
 
+    dynamic_start_time = perf_counter()
+    dynamic_enjoyment, dynamic_solution = dynamic_costonly(cost_budget, activities)
+    dynamic_end_time = perf_counter()
+
     print('========================================')
     print('EVENT PLANNER - RESULTS')
     print('========================================\n')
@@ -20,6 +25,7 @@ def perform_algorithms():
     print(f'Available Budget: £{cost_budget}')
 
     print_solution('BRUTE FORCE ALGORITHM', bruteforce_enjoyment, bruteforce_solution, bruteforce_end_time - bruteforce_start_time)
+    print_solution('DYNAMIC ALGORITHM', dynamic_enjoyment, dynamic_solution, dynamic_end_time - dynamic_start_time)
 
 
 if __name__ == '__main__':

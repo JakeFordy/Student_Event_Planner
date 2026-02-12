@@ -19,7 +19,7 @@ def read_from_file(filename: str):
     return activities, int(total_time), int(total_cost)
 
 
-def print_solution(algorithm: str, enjoyment: int, solution: dict, exec_time):
+def print_solution(algorithm: str, enjoyment: int, solution: dict, time_budget: int, exec_time):
     print('\n--- ', algorithm, ' ---')
     print('Selected Activities:')
 
@@ -32,7 +32,11 @@ def print_solution(algorithm: str, enjoyment: int, solution: dict, exec_time):
         total_cost += int(activity["cost"])
 
     print('\nTotal Enjoyment:', enjoyment)
-    print('Total Time Used:', total_time, 'hours')
     print(f'Total Cost: £{total_cost}')
+    #if only considering cost constraint, then also display how far over time it took
+    if (total_time > time_budget):
+        print(f'Total Time Used: {total_time} hours ({total_time-time_budget} hours over)')
+    else:
+        print(f'Total Time Used: {total_time} hours')
 
     print('\nExecution Time:', exec_time, 'seconds')

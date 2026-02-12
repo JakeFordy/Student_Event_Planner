@@ -1,0 +1,101 @@
+FUNCTION READ_FROM_FILE(filename):
+    // Create empty list to store activities
+    activities = []
+    
+    OPEN filename FOR reading
+        // Read from file, but ignore header
+        READ from filename and ignore first line 
+
+        Read second line from filename
+        (total_time, total_cost) = second line split by whitespace
+
+        WHILE there are more lines in filename DO
+            READ line
+            (name, time, cost, emjoyment) = split line by whitespace
+
+            activity = object with attributes:
+                activity.name = name
+                activity.time = integer(time)
+                activity.cost = integer(cost)
+                activity.enjoyment = integer(enjoyment)
+            
+            Add object activity to list activities
+        END while
+    CLOSE file
+
+    RETURN (activities, integer(total_time), integer(total_cost))
+END FUNCTION
+
+FUNCTION BRUTEFORCE(i, time_left, cost_left, current_selection, activities)
+    // Base case - no more activities to consider
+    IF i = len(activities) THEN
+        RETURN (0, current_selection)
+    END IF
+
+    // Option 1 - skip activity i
+    (skip_enjoyment, skip_selection) = BRUTEFORCE(i + 1, time_left, cost_left, current_selection, activities)
+
+    // Option 2 - take activity i, but only if the constraints allow it
+    IF time_left >= activities[i].time AND cost_left >= activities[i].cost THEN
+        (take_enjoyment, take_selection) = BRUTEFORCE(
+            i + 1,
+            time_left - activities[i].time,
+            cost_left - activities[i].cost,
+            current_selection + [activities[i]],
+            activities)
+
+        take_enjoyment = take_enjoyment + activities[i].enjoyment
+
+        IF take_enjoyment > skip_enjoyment THEN
+            RETURN (take_enjoyment, take_selection)
+        END IF
+    END IF
+
+    // IF taking wasn't possible, or wasnt 'better', keep skip result
+    RETURN (skip_enjoyment, skip_selection)
+END FUNCTION
+
+FUNCTION PRINT_SOLUTION(algorithm_name, enjoyment, solution, exec_time)
+    PRINT newline + "--- " + algorithm_name + " ---"
+    PRINT "Selected activities:"
+
+    total_time_used = 0
+    total_cost_used = 0
+
+    FOR each activity IN solution DO
+        print "- " + activity.name + " (" + activity.time + " hours, £" + activity.cost +
+              ", enjoyment " + activity.enjoyment + ")"
+
+        total_time_used = total_time_used + activity.time
+        total_cost_used = total_cost_used + activity.cost
+    END FOR
+
+    PRINT newline + "Total enjoyment: " + enjoyment
+    PRINT "Total Time Used: " + total_time_used + " hours"
+    PRINT "Total Cost: £" + total_cost_used
+    
+    PRINT newline + "Execution Time: " + exec_time + " seconds"
+END FUNCTION
+
+FUNCTION PERFORM_ALGORITHMS()
+    (activities, time_budget, cost_budget) = READ_FROM_FILE(input_file)
+
+    start_time = current time
+    (best_enjoyment, best_solution) = BRUTEFORCE (0, time_budget, cost_budget, [], activities)
+    end_time = current time
+
+    PRINT "========================================"
+    PRINT "EVENT PLANNER - RESULTS"
+    PRINT "========================================"
+    PRINT ""
+    PRINT "Input File: " + input_file
+    PRINT "Available Time: " + time_budget + " hours"
+    PRINT "Available Budget: £" + cost_budget
+
+    PRINT_SOLUTION("BRUTE FORCE ALGORITHM", best_enjoyment, best_solution, end_time - start_time)
+END FUNCTION
+
+// Main workflow
+BEGIN 
+    PERFORM_ALGORITHMS()
+END

@@ -1,0 +1,31 @@
+Jake
+- algo 1
+- algo 2
+
+Emily
+- intro
+    - tasks + algos
+- explanation
+    - modules/functions/data/structures
+
+Hayden
+- pseudocode
+
+
+Unclaimed/Later:
+- analysis
+    - big O
+- testing of algos
+    - how will test
+    - explanation / why effective
+    - compare algos
+    - limitations of test + algo
+
+
+- extra credit
+    - mini algo 3
+    - better algo 2
+    - more analysis/testing with more inputs
+
+
+and also all the presentation shit

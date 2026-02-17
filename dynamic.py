@@ -2,15 +2,15 @@
 Docstring for dynamic
 """
 
-def dynamic_costonly(cost_budget, activities):
+def dynamic_costonly(total_budget, activities):
     n = len(activities)
 
     enjoyment_table = []
 
     #create enjoyment table (n+1)x(cost_budget+1) size full of 0s
-    for i in range(n+1):
+    for _ in range(n+1):
         row = []
-        for j in range(cost_budget+1):
+        for _ in range(total_budget+1):
             row.append(0)
         enjoyment_table.append(row)
 
@@ -19,24 +19,24 @@ def dynamic_costonly(cost_budget, activities):
         activity_cost = activities[i-1]["cost"]
         activity_enjoyment = activities[i-1]["enjoyment"]
 
-        for current_budget in range(cost_budget+1):
+        for budget_left in range(total_budget+1):
 
             #either skip activity:
-            enjoyment_table[i][current_budget] = enjoyment_table[i-1][current_budget]
+            enjoyment_table[i][budget_left] = enjoyment_table[i-1][budget_left]
 
             #or take activity (if can afford)
-            if activity_cost <= current_budget:
-                take_value = enjoyment_table[i-1][current_budget - activity_cost] + activity_enjoyment
+            if activity_cost <= budget_left:
+                take_value = enjoyment_table[i-1][budget_left - activity_cost] + activity_enjoyment
 
                 #if greater enjoyment than current selection for budget, then add:
-                if take_value > enjoyment_table[i][current_budget]:
-                    enjoyment_table[i][current_budget] = take_value
+                if take_value > enjoyment_table[i][budget_left]:
+                    enjoyment_table[i][budget_left] = take_value
 
-    max_enjoyment = enjoyment_table[n][cost_budget]
+    max_enjoyment = enjoyment_table[n][total_budget]
 
     #backtrack to return selected activities
     selected_activities = []
-    remaining_budget = cost_budget
+    remaining_budget = total_budget
     
     for i in range(n, 0, -1):
         if enjoyment_table[i][remaining_budget] != enjoyment_table[i-1][remaining_budget]:

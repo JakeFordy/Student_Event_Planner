@@ -1,6 +1,6 @@
 ## Group Contribution Statement
 
-### Jake Fordy, student ID:
+### Jake Fordy, student ID: 750005838
 - Programming of Brute Force algorithm
 
 ### Luca Mitchell, student ID:

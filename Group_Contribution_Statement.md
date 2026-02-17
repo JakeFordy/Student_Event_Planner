@@ -1,16 +1,16 @@
 ## Group Contribution Statement
 
-### Jake Fordy
+### Jake Fordy, student ID:
 - Programming of Brute Force algorithm
 
-### Luca Mitchell
+### Luca Mitchell, student ID:
 - Programming of Dynamic Programming algorithm
 
-### Freddie Tjolle
+### Freddie Tjolle, student ID:
 
 ### Emily Chalkley, student ID: 750044837
 - Introduction to presentation
 - Design and Approach explanation
 
-### Hayden Eschle
+### Hayden Eschle, student ID: 740033687
 - Pseudocode for both the Brute Force, and dynamic programming algorithms

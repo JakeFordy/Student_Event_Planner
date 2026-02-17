@@ -38,5 +38,3 @@ def perform_algorithms():
 
 if __name__ == '__main__':
     perform_algorithms()
-
-

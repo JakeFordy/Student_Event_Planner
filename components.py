@@ -3,20 +3,27 @@ def read_from_file(filename: str):
     total_time = 0
     total_cost = 0
 
-    with open(filename, 'r', encoding='utf-8') as f:
-        f.readline()
-        (total_time, total_cost) = f.readline().split(' ')
-        for line in f:
-            name, time, cost, enjoyment = line.strip().split()
-
-            activities.append({
-                "name": name,
-                "time": int(time),
-                "cost": int(cost),
-                "enjoyment": int(enjoyment)                
-                })
-
-    return activities, int(total_time), int(total_cost)
+    try:
+        # exceptions handled in caller function - event_planner()
+        with open(filename, 'r', encoding='utf-8') as f:
+            f.readline()
+            (total_time, total_cost) = f.readline().split(' ')
+            for line in f:
+                name, time, cost, enjoyment = line.strip().split()
+                
+                activities.append({
+                    "name": name,
+                    "time": int(time),
+                    "cost": int(cost),
+                    "enjoyment": int(enjoyment)                
+                    })
+        return activities, int(total_time), int(total_cost)
+    except FileNotFoundError:
+        print("Error: could not find file.")
+    except TypeError:
+        print("Error: values in file are invalid types/format.")
+    except Exception:
+        print("Error: problem occurred reading file.")
 
 
 def print_solution(algorithm: str, enjoyment: int, solution: dict, time_budget: int, exec_time):

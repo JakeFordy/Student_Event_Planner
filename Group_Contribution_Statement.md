@@ -8,8 +8,9 @@
 
 ### Freddie Tjolle
 
-### Emily Chalkley
+### Emily Chalkley, student ID: 750044837
 - Introduction to presentation
+- Design and Approach explanation
 
 ### Hayden Eschle
 - Pseudocode for both the Brute Force, and dynamic programming algorithms

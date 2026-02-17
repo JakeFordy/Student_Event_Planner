@@ -11,15 +11,15 @@ def perform_algorithms():
 
     bruteforce_start_time = perf_counter()
     bruteforce_enjoyment, bruteforce_solution = bruteforce_costonly(0, cost_budget, [], activities)
-    bruteforce_end_time = perf_counter()
+    bruteforce_running_time = perf_counter() - bruteforce_start_time
 
     dynamic_start_time = perf_counter()
     dynamic_enjoyment, dynamic_solution = dynamic_costonly(cost_budget, activities)
-    dynamic_end_time = perf_counter()
+    dynamic_running_time = perf_counter() - dynamic_start_time
 
     bruteforce_bothconstraints_start_time = perf_counter()
     bruteforce_bothconstraints_enjoyment, bruteforce_bothconstraints_solution = bruteforce_bothconstraints(0, time_budget, cost_budget, [], activities)
-    bruteforce_bothconstraints_end_time = perf_counter()
+    bruteforce_bothconstraints_running_time = perf_counter() - bruteforce_bothconstraints_start_time
 
     print('========================================')
     print('EVENT PLANNER - RESULTS')
@@ -29,11 +29,11 @@ def perform_algorithms():
     print(f'Available Budget: £{cost_budget}')
 
     print_solution('BRUTE FORCE ALGORITHM (cost only)', bruteforce_enjoyment, bruteforce_solution, time_budget,
-                   bruteforce_end_time - bruteforce_start_time)
+                   bruteforce_running_time)
     print_solution('DYNAMIC ALGORITHM (cost only)', dynamic_enjoyment, dynamic_solution, time_budget,
-                   dynamic_end_time - dynamic_start_time)
+                   dynamic_running_time)
     print_solution('BRUTE FORCE ALGORITHM (cost+time)', bruteforce_bothconstraints_enjoyment, bruteforce_bothconstraints_solution, time_budget,
-                   bruteforce_bothconstraints_end_time - bruteforce_bothconstraints_start_time)
+                   bruteforce_bothconstraints_running_time)
 
 
 if __name__ == '__main__':

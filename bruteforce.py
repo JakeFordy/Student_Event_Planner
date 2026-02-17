@@ -27,19 +27,20 @@ Execution Time: 0.002 seconds
 """
 
 
-def bruteforce_costonly(i, cost_left, current_selection, activities):
+def bruteforce_costonly(activity_num, cost_left, current_selection, activities):
     #base - no more activities
-    if i == len(activities):
+    if activity_num == len(activities):
         return 0, current_selection
 
     #2 routes: either skip this activity or take it
     #A: skip
-    skip_enjoyment, skip_selection = bruteforce_costonly(i+1, cost_left, current_selection, activities)
+    skip_enjoyment, skip_selection = bruteforce_costonly(activity_num, cost_left, current_selection, activities)
 
     #B: Take (only if possible tho)
-    if cost_left >= activities[i]["cost"]:
-        take_enjoyment, take_selection = bruteforce_costonly(i+1, cost_left - activities[i]["cost"], current_selection + [activities[i]], activities)
-        take_enjoyment += activities[i]["enjoyment"]
+    activity = activities[activity_num]
+    if cost_left >= activity["cost"]:
+        take_enjoyment, take_selection = bruteforce_costonly(activity_num, cost_left - activity["cost"], current_selection + [activity], activities)
+        take_enjoyment += activity["enjoyment"]
 
         #if better selection when taking this activity
         if take_enjoyment > skip_enjoyment:
@@ -48,19 +49,20 @@ def bruteforce_costonly(i, cost_left, current_selection, activities):
     #else if better selection when skipping this activity
     return skip_enjoyment, skip_selection
 
-def bruteforce_bothconstraints(i, time_left, cost_left, current_selection, activities):
+def bruteforce_bothconstraints(activity_num, time_left, cost_left, current_selection, activities):
     #base - no more activities
-    if i == len(activities):
+    if activity_num == len(activities):
         return 0, current_selection
 
     #2 routes: either skip this activity or take it
     #A: skip
-    skip_enjoyment, skip_selection = bruteforce_bothconstraints(i+1, time_left, cost_left, current_selection, activities)
+    skip_enjoyment, skip_selection = bruteforce_bothconstraints(activity_num+1, time_left, cost_left, current_selection, activities)
 
     #B: Take (only if possible tho)
-    if time_left >= activities[i]["time"] and cost_left >= activities[i]["cost"]:
-        take_enjoyment, take_selection = bruteforce_bothconstraints(i+1, time_left - activities[i]["time"], cost_left - activities[i]["cost"], current_selection + [activities[i]], activities)
-        take_enjoyment += activities[i]["enjoyment"]
+    activity = activities[activity_num]
+    if time_left >= activity["time"] and cost_left >= activity["cost"]:
+        take_enjoyment, take_selection = bruteforce_bothconstraints(activity_num+1, time_left - activity["time"], cost_left - activity["cost"], current_selection + [activity], activities)
+        take_enjoyment += activity["enjoyment"]
 
         #if better selection when taking this activity
         if take_enjoyment > skip_enjoyment:

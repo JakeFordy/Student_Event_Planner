@@ -4,7 +4,6 @@ def read_from_file(filename: str):
     total_cost = 0
 
     try:
-        # exceptions handled in caller function - event_planner()
         with open(filename, 'r', encoding='utf-8') as f:
             f.readline()
             (total_time, total_cost) = f.readline().split(' ')
@@ -18,16 +17,26 @@ def read_from_file(filename: str):
                     "enjoyment": int(enjoyment)                
                     })
         return activities, int(total_time), int(total_cost)
+    
     except FileNotFoundError:
         print("Error: could not find file.")
+        return [], -1, -1 #IM NOT SURE IF THIS IS THE BEST WAY TO DO IT???
     except TypeError:
         print("Error: values in file are invalid types/format.")
+        return [], -1, -1
     except Exception:
         print("Error: problem occurred reading file.")
+        return [], -1, -1
 
 
-def print_solution(algorithm: str, enjoyment: int, solution: dict, time_budget: int, exec_time):
-    print('\n--- ', algorithm, ' ---')
+def print_solution(algorithm_name: str, enjoyment: int, solution: dict, time_budget: int, exec_time):
+    print('\n--- ', algorithm_name, ' ---')
+
+    if len(solution) == 0:
+        print("No solutions found within constraint(s).")
+        print('\nExecution Time:', exec_time, 'seconds')
+        return
+    
     print('Selected Activities:')
 
     total_time = 0

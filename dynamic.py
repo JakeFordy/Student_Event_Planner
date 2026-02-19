@@ -3,6 +3,9 @@ Docstring for dynamic
 """
 
 def dynamic_costonly(total_budget, activities):
+    """
+    docstring
+    """
     n = len(activities)
 
     enjoyment_table = []
@@ -37,7 +40,7 @@ def dynamic_costonly(total_budget, activities):
     #backtrack to return selected activities
     selected_activities = []
     remaining_budget = total_budget
-    
+
     for i in range(n, 0, -1):
         if enjoyment_table[i][remaining_budget] != enjoyment_table[i-1][remaining_budget]:
             activity = activities[i-1]

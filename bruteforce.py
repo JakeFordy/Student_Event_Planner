@@ -28,18 +28,28 @@ Execution Time: 0.002 seconds
 
 
 def bruteforce_costonly(activity_num, cost_left, current_selection, activities):
+    """
+    Goes through every possible combination of activities (given within time constraint) 
+    by recursively branching between either taking or not taking the current activity.
+    Base condition is when it reaches the final activity in the list. It will then return 
+    up the current selection that provided the maximum enjoyment through the call stack.
+    """
     #base - no more activities
     if activity_num == len(activities):
         return 0, current_selection
 
     #2 routes: either skip this activity or take it
     #A: skip
-    skip_enjoyment, skip_selection = bruteforce_costonly(activity_num+1, cost_left, current_selection, activities)
+    skip_enjoyment, skip_selection = bruteforce_costonly(activity_num+1, cost_left,
+                                                         current_selection, activities)
 
     #B: Take (only if possible tho)
     activity = activities[activity_num]
     if cost_left >= activity["cost"]:
-        take_enjoyment, take_selection = bruteforce_costonly(activity_num+1, cost_left - activity["cost"], current_selection + [activity], activities)
+        take_enjoyment, take_selection = bruteforce_costonly(activity_num+1,
+                                                             cost_left - activity["cost"],
+                                                             current_selection + [activity],
+                                                             activities)
         take_enjoyment += activity["enjoyment"]
 
         #if better selection when taking this activity
@@ -50,18 +60,30 @@ def bruteforce_costonly(activity_num, cost_left, current_selection, activities):
     return skip_enjoyment, skip_selection
 
 def bruteforce_bothconstraints(activity_num, time_left, cost_left, current_selection, activities):
+    """
+    Goes through every possible combination of activities (given within both time & cost 
+    constraints) by recursively branching between either taking or not taking the current activity.
+    Base condition is when it reaches the final activity in the list. It will then return 
+    up the current selection that provided the maximum enjoyment through the call stack.
+    """
     #base - no more activities
     if activity_num == len(activities):
         return 0, current_selection
 
     #2 routes: either skip this activity or take it
     #A: skip
-    skip_enjoyment, skip_selection = bruteforce_bothconstraints(activity_num+1, time_left, cost_left, current_selection, activities)
+    skip_enjoyment, skip_selection = bruteforce_bothconstraints(activity_num+1,
+                                                                time_left, cost_left,
+                                                                current_selection, activities)
 
     #B: Take (only if possible tho)
     activity = activities[activity_num]
     if time_left >= activity["time"] and cost_left >= activity["cost"]:
-        take_enjoyment, take_selection = bruteforce_bothconstraints(activity_num+1, time_left - activity["time"], cost_left - activity["cost"], current_selection + [activity], activities)
+        take_enjoyment, take_selection = bruteforce_bothconstraints(activity_num+1,
+                                                                    time_left - activity["time"],
+                                                                    cost_left - activity["cost"],
+                                                                    current_selection + [activity],
+                                                                    activities)
         take_enjoyment += activity["enjoyment"]
 
         #if better selection when taking this activity

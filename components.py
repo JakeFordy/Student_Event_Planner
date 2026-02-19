@@ -1,4 +1,12 @@
+"""
+add docstrings
+
+"""
+
 def read_from_file(filename: str):
+    """
+    add docstring
+    """
     activities = []
     total_time = 0
     total_cost = 0
@@ -9,7 +17,7 @@ def read_from_file(filename: str):
             (total_time, total_cost) = f.readline().split(' ')
             for line in f:
                 name, time, cost, enjoyment = line.strip().split()
-                
+
                 activities.append({
                     "name": name,
                     "time": int(time),
@@ -17,7 +25,7 @@ def read_from_file(filename: str):
                     "enjoyment": int(enjoyment)                
                     })
         return activities, int(total_time), int(total_cost)
-    
+
     except FileNotFoundError:
         print("Error: could not find file.")
         return [], -1, -1       #IM NOT SURE IF THIS IS THE BEST WAY TO DO IT???
@@ -29,14 +37,17 @@ def read_from_file(filename: str):
         return [], -1, -1
 
 
-def print_solution(algorithm_name: str, enjoyment: int, solution: dict, time_budget: int, exec_time):
-    print('\n--- ', algorithm_name, ' ---')
+def print_solution(algo_name: str, enjoyment: int, solution: dict, time_budget: int, exec_time):
+    """
+    add docstring
+    """
+    print('\n--- ', algo_name, ' ---')
 
     if len(solution) == 0:
         print("No solutions found within constraint(s).")
         print('\nExecution Time:', exec_time, 'seconds')
         return
-    
+
     print('Selected Activities:')
 
     total_time = 0
@@ -50,7 +61,7 @@ def print_solution(algorithm_name: str, enjoyment: int, solution: dict, time_bud
     print('\nTotal Enjoyment:', enjoyment)
     print(f'Total Cost: £{total_cost}')
     #if only considering cost constraint, then also display how far over time it took
-    if (total_time > time_budget):
+    if total_time > time_budget:
         print(f'Total Time Used: {total_time} hours ({total_time-time_budget} hours over)')
     else:
         print(f'Total Time Used: {total_time} hours')

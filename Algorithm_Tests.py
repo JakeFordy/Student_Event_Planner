@@ -1,54 +1,73 @@
 '''
 This file is to implement the testing of the bruteforce and dynamic programming algorithms
+Test the small imput size for both algorithms
+Compare the output to a known (computed by hand) algorithm
+This verifies that the algorithm 'work' 
+
+Mention possibility of edge-cases 
+i.e. test for file not found, isuse converting to int
+
+Measure time complexity of algorithms
+O notation and time measurements for different cases
+Test this for small, medium, large
+
+Also, test this for n = 10, 15, 20, 25, 30, ...
+Print statement, and export to csv file 
+
+Stress testing, use high number of itterations of random ints
+
+Both run as perform_algorithms()
+Or individually run as bruteforce_costonly(activity_num, cost_left, current_selection, activities)
+Or dynamic_costonly(total_budget, activities)
 '''
 
-# Test the small imput size for both algorithms
-# Compare the output to a known (computed by hand) algorithm
-# This verifies that the algorithm 'work' 
+import random
+from pathlib import Path
 
-# Mention possibility of edge-cases 
-# i.e. test for file not found, isuse converting to int
+INPUT_DIRECTORY = "inputs/"
 
-# Measure time complexity of algorithms
-# O notation and time measurements for different cases
-# Test this for small, medium, large
+def generate_random_input(n, seed = 0, case_index = 0):
+    
+    rng = random.Random(seed)
 
-# Also, test this for n = 10, 15, 20, 25, 30, ...
-# Print statement, and export to csv file 
+    activities = [] 
+    for i in range(n):
+        name = f"Act-{i}"
+        time = rng.randint(1, 10)
+        cost = rng.randint(1, 20)
+        enjoyment = rng.randint(1, 100)
+        activities.append((name, time, cost, enjoyment))
 
-# Stress testing, use high number of itterations of random ints
+    total_cost = sum(a[2] for a in activities)
+    total_time = sum(a[1] for a in activities)
 
-# Both run as perform_algorithms()
-# Or individually run as bruteforce_costonly(activity_num, cost_left, current_selection, activities)
-# Or dynamic_costonly(total_budget, activities)
+    # Set budget constrains to ~50% so doesnt create a trivial instance
+    Cost_budget = total_cost // 2
+    Time_allocation = total_time // 2
 
-from time import perf_counter
-from sys import argv
-from os import getcwd
+    lines = []
+    lines.append(str(n))
+    lines.append(f"{Time_allocation} {Cost_budget}")
 
-from components import read_from_file
-from bruteforce import bruteforce_bothconstraints, bruteforce_costonly
-from dynamic import dynamic_costonly
+    for name_append, time_append, cost_append, enjoyment_append in activities:
+        lines.append(f"{name_append} {time_append} {cost_append} {enjoyment_append}")
+    
+    filepath = f"{INPUT_DIRECTORY}input_{n}_{case_index}.txt" 
 
-INPUT_DIRECTORY = getcwd() + '/inputs/'
+    Path(filepath).parent.mkdir(parents = True, exist_ok = True)
 
-def perform_tests():
-    activities, time_budget, cost_budget = read_from_file(f'{INPUT_DIRECTORY}{INPUT_FILE}')
+    Path(filepath).write_text("\n".join(lines) + "\n", encoding = "utf-8")
 
-    bruteforce_start_time = perf_counter()
-    bruteforce_enjoyment, bruteforce_solution = bruteforce_costonly(0, cost_budget, [], activities)
-    bruteforce_running_time = perf_counter() - bruteforce_start_time
+    print(f"Created {filepath}")
 
-    dynamic_start_time = perf_counter()
-    dynamic_enjoyment, dynamic_solution = dynamic_costonly(cost_budget, activities)
-    dynamic_running_time = perf_counter() - dynamic_start_time
+def generate_random_input_series(k=10):
+    n_values = range(5, 55, 5)  # 5,10,15,...50
 
-    bruteforce_bothconstraints_start_time = perf_counter()
-    bruteforce_bothconstraints_enjoyment, bruteforce_bothconstraints_solution = bruteforce_bothconstraints(0, time_budget, cost_budget, [], activities)
-    bruteforce_bothconstraints_running_time = perf_counter() - bruteforce_bothconstraints_start_time
+    for n in n_values:
+        print(f"\nGenerating {k} cases for n={n}")
+        
+        for case_index in range(k):
+            seed = (n * 1000) + case_index
+            generate_random_input(n, seed=seed, case_index=case_index)
 
-if __name__ == '__main__':
-    perform_tests()
-
-# Creates files for each value of n, 3 random for each. 
-# Runs each file and creates an average run time for the algorithm. 
+generate_random_input_series(k = 10)

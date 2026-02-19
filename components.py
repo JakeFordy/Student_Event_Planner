@@ -20,8 +20,8 @@ def read_from_file(filename: str):
     
     except FileNotFoundError:
         print("Error: could not find file.")
-        return [], -1, -1 #IM NOT SURE IF THIS IS THE BEST WAY TO DO IT???
-    except TypeError:
+        return [], -1, -1       #IM NOT SURE IF THIS IS THE BEST WAY TO DO IT???
+    except TypeError, ValueError:
         print("Error: values in file are invalid types/format.")
         return [], -1, -1
     except Exception:

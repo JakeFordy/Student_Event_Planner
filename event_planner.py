@@ -8,7 +8,8 @@ from os import getcwd
 
 from components import read_from_file, print_solution
 from bruteforce import bruteforce_bothconstraints, bruteforce_costonly
-from dynamic import dynamic_costonly
+from dynamic import dynamic_costonly, dynamic_bothconstraints
+from greedy import greedy_costonly, greedy_bothconstraints
 
 INPUT_DIRECTORY = getcwd() + '/inputs/'
 
@@ -34,6 +35,20 @@ def perform_algorithms(input_file):
     bruteforce_bothconstraints_enjoyment, bruteforce_bothconstraints_solution = bruteforce_bothconstraints(0, time_budget, cost_budget, [], activities)
     bruteforce_bothconstraints_running_time = perf_counter() - bruteforce_bothconstraints_start_time
 
+    dynamic_bothconstraints_start_time = perf_counter()
+    dynamic_bothconstraints_enjoyment, dynamic_bothconstraints_solution = dynamic_bothconstraints(time_budget, cost_budget, activities)
+    dynamic_bothconstraints_running_time = perf_counter() - dynamic_bothconstraints_start_time
+
+    greedy_start_time = perf_counter()
+    greedy_enjoyment, greedy_solution = greedy_costonly(cost_budget, activities)
+    greedy_running_time = perf_counter() - greedy_start_time
+
+    greedy_bothconstraints_start_time = perf_counter()
+    greedy_bothconstraints_enjoyment, greedy_bothconstraints_solution = greedy_bothconstraints(time_budget, cost_budget, activities)
+    greedy_bothconstraints_running_time = perf_counter() - greedy_bothconstraints_start_time
+
+
+
     print('========================================')
     print('EVENT PLANNER - RESULTS')
     print('========================================\n')
@@ -48,7 +63,14 @@ def perform_algorithms(input_file):
     print_solution('BRUTE FORCE ALGORITHM (cost & time)', bruteforce_bothconstraints_enjoyment,
                    bruteforce_bothconstraints_solution, time_budget,
                    bruteforce_bothconstraints_running_time)
-
+    print_solution('WIP - DYNAMIC ALGORITHM (cost & time)', dynamic_bothconstraints_enjoyment,
+                   dynamic_bothconstraints_solution, time_budget,
+                   dynamic_bothconstraints_running_time)
+    print_solution('WIP - GREEDY ALGORITHM (cost only)', greedy_enjoyment, greedy_solution,
+                   time_budget, greedy_running_time)
+    print_solution('WIP - GREEDY ALGORITHM (cost & time)', greedy_bothconstraints_enjoyment,
+                   greedy_bothconstraints_solution, time_budget,
+                   greedy_bothconstraints_running_time)
 
 if __name__ == '__main__':
     if len(argv) == 2:

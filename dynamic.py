@@ -48,3 +48,9 @@ def dynamic_costonly(total_budget, activities):
             remaining_budget -= activity["cost"]
 
     return max_enjoyment, selected_activities
+
+def dynamic_bothconstraints(total_time, total_budget, activities):
+    """
+    placeholder function
+    """
+    return total_budget+total_time, [activities[0], activities[1]]

@@ -23,11 +23,14 @@ This file is to implement the testing of the bruteforce and dynamic programming 
 # Or dynamic_costonly(total_budget, activities)
 
 from time import perf_counter
+from sys import argv
+from os import getcwd
 
 from components import read_from_file
 from bruteforce import bruteforce_bothconstraints, bruteforce_costonly
 from dynamic import dynamic_costonly
-from config import INPUT_DIRECTORY, INPUT_FILE
+
+INPUT_DIRECTORY = getcwd() + '/inputs/'
 
 def perform_tests():
     activities, time_budget, cost_budget = read_from_file(f'{INPUT_DIRECTORY}{INPUT_FILE}')
@@ -46,3 +49,6 @@ def perform_tests():
 
 if __name__ == '__main__':
     perform_tests()
+
+# Creates files for each value of n, 3 random for each. 
+# Runs each file and creates an average run time for the algorithm. 

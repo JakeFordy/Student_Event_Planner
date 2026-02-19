@@ -34,12 +34,12 @@ def bruteforce_costonly(activity_num, cost_left, current_selection, activities):
 
     #2 routes: either skip this activity or take it
     #A: skip
-    skip_enjoyment, skip_selection = bruteforce_costonly(activity_num, cost_left, current_selection, activities)
+    skip_enjoyment, skip_selection = bruteforce_costonly(activity_num+1, cost_left, current_selection, activities)
 
     #B: Take (only if possible tho)
     activity = activities[activity_num]
     if cost_left >= activity["cost"]:
-        take_enjoyment, take_selection = bruteforce_costonly(activity_num, cost_left - activity["cost"], current_selection + [activity], activities)
+        take_enjoyment, take_selection = bruteforce_costonly(activity_num+1, cost_left - activity["cost"], current_selection + [activity], activities)
         take_enjoyment += activity["enjoyment"]
 
         #if better selection when taking this activity

@@ -38,7 +38,7 @@ def generate_random_input(n, seed = 0, case_index = 0):
     print(f"Created {filepath}")
 
 def generate_random_input_series(k=10):
-    n_values = range(5, 55, 5)  # 5,10,15,...50
+    n_values = range(3, 36, 3)  # 5,10,15,...50
 
     for n in n_values:
         print(f"\nGenerating {k} cases for n={n}")

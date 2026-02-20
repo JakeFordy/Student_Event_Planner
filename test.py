@@ -54,6 +54,18 @@ def time_for_dynamic(filepath):
 
     return perf_counter() - start
 
+def cases_for_n(n):
+    if n <= 12:
+        return 48
+    elif n <= 18:
+        return 24
+    elif n <= 24:
+        return 12
+    elif n <= 30:
+        return 6
+    else:
+        return 3
+
 def benchmark_algorithms(instances_per_n = 10, output_file = "benchmark_result.csv"):
 
     results = []
@@ -61,7 +73,9 @@ def benchmark_algorithms(instances_per_n = 10, output_file = "benchmark_result.c
     print("\nBenchmarking Brute Force and Dynamic Programming")
     print("n\tBF_min\tBF_med\tBF_max\tDP_min\tDP_med\tDP_max\tSpeedup")
 
-    for n in range(5, 55, 5):
+    for n in range(3, 36, 3):
+
+        instances_per_n = cases_for_n(n)
         brute_times = []
         dynamic_times = []
 

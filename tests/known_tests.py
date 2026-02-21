@@ -1,10 +1,21 @@
+"""
+This is a module to implement assertion tests.
+
+The input files were created manually with known values to test 
+cases that would cause issues in an incorrecly implemented algorithm.
+
+The readme file contains further information on what each test is testing for, 
+why the issue is being tested, and the usage issues if the tests do not pass.
+"""
+
 import os
 from algorithms.components import read_from_file
 from algorithms.bruteforce import bruteforce_costonly
 from algorithms.dynamic import dynamic_costonly
 
-KNOWN_DIRECTORY = "tests/known_inputs"
+KNOWN_INPUT_DIRECTORY = "tests/known_inputs"
 
+# Dictionary of the input files paired with the expected enjoyment values
 EXPECTED = {
     "test_exact_fit.txt": 55,
     "test_tradeoff.txt": 110,
@@ -15,27 +26,46 @@ EXPECTED = {
 }
 
 def solve_bruteforce_costonly(filepath: str) -> int:
+    """
+    Returns optimal values from bruteforce algorithm
+    """
     activities, _, cost_budget = read_from_file(filepath)
     return bruteforce_costonly(0, cost_budget, [], activities)
 
 def solve_dynamic_costonly(filepath: str) -> int:
+    """
+    Returns optimal values from dynamic programming algorithm
+    """
     activities, _, cost_budget = read_from_file(filepath)
     return dynamic_costonly(cost_budget, activities)
 
 def best_value(result):
+    """
+    Returns only the enjoyment value from the algorithm output
+    """
     if isinstance(result, tuple):
         return result[0] 
     return result
 
 def assertion_test():
-    for fname, expected in EXPECTED.items():
-        path = os.path.join(KNOWN_DIRECTORY, fname)
+    """
+    Implementation of the assertion tests
 
-        bf = best_value(solve_bruteforce_costonly(path))
-        dp = best_value(solve_dynamic_costonly(path))
+    Compares the enjoyment values output from the algorithms with the known answers
 
-        assert bf == expected, f"{fname}: brute force got {bf}, expected {expected}"
-        assert dp == expected, f"{fname}: dynamic got {dp}, expected {expected}"
+    If each test is passed, Pass 'test_file_name' : enjoyment = 'expected'"
+    """
+    for test_file_name, expected in EXPECTED.items():
+        # Fetches the input file using tests/known_inputs/filename
+        path = os.path.join(KNOWN_INPUT_DIRECTORY, test_file_name)
 
-        print(f"PASS {fname}: enjoyment={expected}")
+        # Computes the solutions for each algorithm
+        brute = best_value(solve_bruteforce_costonly(path))
+        dynamic = best_value(solve_dynamic_costonly(path))
 
+        # Checks that the computed solution matches the optimal solution
+        assert brute == expected, f"{test_file_name}: brute force got {brute}, expected {expected}"
+        assert dynamic == expected, f"{test_file_name}: dynamic got {dynamic}, expected {expected}"
+
+        # Prints the following statement only if both assertions passed
+        print(f"PASS {test_file_name}: enjoyment = {expected}")

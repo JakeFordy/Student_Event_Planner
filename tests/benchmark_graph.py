@@ -66,12 +66,8 @@ def linear_time_vs_n(n_values, bf_med, dp_med):
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-
     plt.show()
 
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    plt.savefig(OUTPUT_DIR / "time_vs_n_linear.png", dpi=300, bbox_inches="tight")
-    plt.close()
 
 def log_time_vs_n(n_values, bf_med, dp_med):
     brute_x, brute_y = filter_valid(n_values, bf_med)
@@ -88,12 +84,7 @@ def log_time_vs_n(n_values, bf_med, dp_med):
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-
     plt.show()
-
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    plt.savefig(OUTPUT_DIR / "time_vs_n_log.png", dpi=300, bbox_inches="tight")
-    plt.close()
 
 def speedup_chart_linear(n_values, speedup):
     x_vals = []

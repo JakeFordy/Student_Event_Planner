@@ -6,10 +6,10 @@ from time import perf_counter
 from sys import argv
 from os import getcwd
 
-from components import read_from_file, print_solution
-from bruteforce import bruteforce_bothconstraints, bruteforce_costonly
-from dynamic import dynamic_costonly, dynamic_bothconstraints
-from greedy import greedy_costonly, greedy_bothconstraints
+from algorithms.components import read_from_file, print_solution
+from algorithms.bruteforce import bruteforce_bothconstraints, bruteforce_costonly
+from algorithms.dynamic import dynamic_costonly, dynamic_bothconstraints
+from algorithms.greedy import greedy_costonly, greedy_bothconstraints
 
 INPUT_DIRECTORY = getcwd() + '/inputs/'
 
@@ -20,7 +20,7 @@ def perform_algorithms(input_file):
     activities, time_budget, cost_budget = read_from_file(f'{INPUT_DIRECTORY}{input_file}')
 
     if len(activities) == 0 or time_budget < 0 or cost_budget < 0:
-        print("Ending program... please check the file you inputted and try again")
+        print("Ending program... please check the file you input and try again")
         return
 
     bruteforce_start_time = perf_counter()

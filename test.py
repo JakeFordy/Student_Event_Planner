@@ -1,5 +1,0 @@
-from tests.create_test_cases  import generate_random_input_series
-from tests.benchmark_test import benchmark_algorithms
-
-generate_random_input_series()
-benchmark_algorithms()

@@ -24,11 +24,11 @@ def perform_algorithms(input_file):
         return
 
     bruteforce_start_time = perf_counter()
-    bruteforce_enjoyment, bruteforce_solution = bruteforce_costonly(0, cost_budget, [], activities)
+    bruteforce_enjoyment, bruteforce_solution = bruteforce_costonly(0, cost_budget, 0, [], activities)
     bruteforce_running_time = perf_counter() - bruteforce_start_time
 
     bruteforce_bothconstraints_start_time = perf_counter()
-    bruteforce_bothconstraints_enjoyment, bruteforce_bothconstraints_solution = bruteforce_bothconstraints(0, time_budget, cost_budget, [], activities)
+    bruteforce_bothconstraints_enjoyment, bruteforce_bothconstraints_solution = bruteforce_bothconstraints(0, time_budget, cost_budget, 0, [], activities)
     bruteforce_bothconstraints_running_time = perf_counter() - bruteforce_bothconstraints_start_time
 
     dynamic_start_time = perf_counter()

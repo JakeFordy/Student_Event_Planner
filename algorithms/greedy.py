@@ -2,6 +2,15 @@
 docstring
 
 pass in ratio consts as args and through terminal (tho have default vals)
+
+
+diffferent ratios:
+
+- normalised_ratio = enjoyment / (cost/maxcost)
+
+- weighted_ratio = enjoyment / (cost*weight)    or enjoyment / (cost*weight0 + time*weight1)
+
+- combined_ratio = (enjoyment / cost) + (enjoyment / time)
 """
 
 #sorts by ratio (custom function) descending
@@ -63,12 +72,13 @@ def greedy_costonly(total_budget, activities):
 
     return total_enjoyment, selected_activities
 
-def greedy_bothconstraints(total_time, total_budget, activities, ):
+def greedy_bothconstraints(total_time, total_budget, activities, ratio_weighting=[50,1]):
     """
     placeholder function
     """
+
     def get_ratio(activity):
-        return activity["enjoyment"] / (activity["cost"] + activity["time"])
+        return activity["enjoyment"] / (ratio_weighting[0]*activity["time"] + ratio_weighting[1]*activity["cost"])
     
     #sort activities by ratio descending
     sorted_activities = merge_sort_activities(activities, get_ratio)

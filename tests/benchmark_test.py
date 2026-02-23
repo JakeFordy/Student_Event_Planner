@@ -22,7 +22,7 @@ def time_for_bruteforce(filepath: str ) -> float:
     activities, time_budget, cost_budget = read_from_file(filepath)
 
     start = perf_counter()
-    bruteforce_costonly(0, cost_budget, [], activities)
+    bruteforce_costonly(0, cost_budget, 0, [], activities)
     return perf_counter() - start
 
 def time_for_dynamic(filepath: str ) -> float:
@@ -65,30 +65,25 @@ def cases_for_bruteforce(n: int) -> int:
     """
     return 3
 
-def benchmark_algorithms(output_file = "tests/benchmark_results/benchmark_result.csv"):
+def benchmark_algorithms(a: int, b: int, output_file = "tests/benchmark_results/benchmark_result.csv"):
     """
     Carries out the benchmark tests under the given constraints
 
     Prints the results to the command line, and also exports a 
     csv file containing all of the results to tests/benchmark_results
     """
-    
-    # Maximum problem size
-    n_max = 1000
-     # Bruteforce hard stop at 26, as tests become impractically long beyond this
-    bf_max_n = 26
 
     results = []
 
     print("\nBenchmarking Brute Force and Dynamic Programming")
     print("n\tBF_min\tBF_med\tBF_max\tDP_min\tDP_med\tDP_max\tSpeedup")
 
-    n = 2
-    while n<= n_max:
+    n = int(2)
+    while n <= a:
         
         # Determine number of cases for each algorithm
         dynamic_cases = cases_for_dynamic(n)
-        bruteforce_cases = cases_for_bruteforce(n) if n <= bf_max_n else 0
+        bruteforce_cases = cases_for_bruteforce(n) if n <= b else 0
 
         brute_times = []
         dynamic_times = []

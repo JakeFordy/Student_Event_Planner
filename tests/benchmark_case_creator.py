@@ -87,15 +87,14 @@ def generate_random_input(n, seed = 0, case_index = 0):
     # Write file to disk    
     Path(filepath).write_text("\n".join(lines) + "\n", encoding = "utf-8")
 
-def generate_random_input_series():
+def generate_random_input_series(a :int):
     """
     Generate a full benchmark dataset according to predefined rules
     """
-    n = 2
-    n_max = 1000
+    n = int(2)
     total_files = 0
 
-    while n <= n_max:
+    while n <= a:
         cases_per_n = cases_for_n(n)
         for case_index in range(cases_per_n):
             

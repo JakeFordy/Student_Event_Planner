@@ -12,6 +12,8 @@ import os
 from algorithms.components import read_from_file
 from algorithms.bruteforce import bruteforce_costonly
 from algorithms.dynamic import dynamic_costonly
+from algorithms.bruteforce import bruteforce_bothconstraints
+from algorithms.dynamic import dynamic_bothconstraints
 
 KNOWN_INPUT_DIRECTORY = "tests/known_inputs"
 
@@ -30,7 +32,7 @@ def solve_bruteforce_costonly(filepath: str) -> int:
     Returns optimal values from bruteforce algorithm
     """
     activities, _, cost_budget = read_from_file(filepath)
-    return bruteforce_costonly(0, cost_budget, [], activities)
+    return bruteforce_costonly(0, cost_budget, 0, [], activities)
 
 def solve_dynamic_costonly(filepath: str) -> int:
     """
@@ -38,6 +40,20 @@ def solve_dynamic_costonly(filepath: str) -> int:
     """
     activities, _, cost_budget = read_from_file(filepath)
     return dynamic_costonly(cost_budget, activities)
+
+def solve_bruteforce_bothconstrains(filepath: str) -> int:
+    """
+    Returns optimal values from bruteforce algorithm
+    """
+    activities, time_budget, cost_budget = read_from_file(filepath)
+    return bruteforce_bothconstraints(0, time_budget, cost_budget, 0, [], activities)
+
+def solve_dynamic_bothconstrains(filepath: str) -> int:
+    """
+    Returns optimal values from dynamic programming algorithm
+    """
+    activities, time_budget, cost_budget = read_from_file(filepath)
+    return dynamic_bothconstraints(time_budget, cost_budget, activities)
 
 def best_value(result):
     """
@@ -62,10 +78,14 @@ def assertion_test():
         # Computes the solutions for each algorithm
         brute = best_value(solve_bruteforce_costonly(path))
         dynamic = best_value(solve_dynamic_costonly(path))
+        brute_both = best_value(solve_bruteforce_bothconstrains(path))
+        dynamic_both = best_value(solve_dynamic_bothconstrains(path))
 
         # Checks that the computed solution matches the optimal solution
         assert brute == expected, f"{test_file_name}: brute force got {brute}, expected {expected}"
         assert dynamic == expected, f"{test_file_name}: dynamic got {dynamic}, expected {expected}"
+        assert brute_both == expected, f"{test_file_name}: brute force got {brute}, expected {expected}"
+        assert dynamic_both == expected, f"{test_file_name}: dynamic got {dynamic}, expected {expected}"
 
         # Prints the following statement only if both assertions passed
         print(f"PASS {test_file_name}: enjoyment = {expected}")

@@ -3,7 +3,7 @@
 ### Jake Fordy, student ID: 750005838
 - Programming of Brute Force algorithm
 
-### Luca Mitchell, student ID:
+### Luca Mitchell, student ID: 750009029
 - Programming of Dynamic Programming algorithm
 
 ### Freddie Tjolle, student ID:

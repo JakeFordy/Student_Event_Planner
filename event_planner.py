@@ -27,13 +27,13 @@ def perform_algorithms(input_file):
     bruteforce_enjoyment, bruteforce_solution = bruteforce_costonly(0, cost_budget, [], activities)
     bruteforce_running_time = perf_counter() - bruteforce_start_time
 
-    dynamic_start_time = perf_counter()
-    dynamic_enjoyment, dynamic_solution = dynamic_costonly(cost_budget, activities)
-    dynamic_running_time = perf_counter() - dynamic_start_time
-
     bruteforce_bothconstraints_start_time = perf_counter()
     bruteforce_bothconstraints_enjoyment, bruteforce_bothconstraints_solution = bruteforce_bothconstraints(0, time_budget, cost_budget, [], activities)
     bruteforce_bothconstraints_running_time = perf_counter() - bruteforce_bothconstraints_start_time
+
+    dynamic_start_time = perf_counter()
+    dynamic_enjoyment, dynamic_solution = dynamic_costonly(cost_budget, activities)
+    dynamic_running_time = perf_counter() - dynamic_start_time
 
     dynamic_bothconstraints_start_time = perf_counter()
     dynamic_bothconstraints_enjoyment, dynamic_bothconstraints_solution = dynamic_bothconstraints(time_budget, cost_budget, activities)
@@ -60,15 +60,15 @@ def perform_algorithms(input_file):
                    time_budget, bruteforce_running_time)
     print_solution('DYNAMIC ALGORITHM (cost only)', dynamic_enjoyment, dynamic_solution,
                    time_budget, dynamic_running_time)
+    print_solution('GREEDY ALGORITHM (cost only)', greedy_enjoyment, greedy_solution,
+                   time_budget, greedy_running_time)
     print_solution('BRUTE FORCE ALGORITHM (cost & time)', bruteforce_bothconstraints_enjoyment,
                    bruteforce_bothconstraints_solution, time_budget,
                    bruteforce_bothconstraints_running_time)
-    print_solution('WIP - DYNAMIC ALGORITHM (cost & time)', dynamic_bothconstraints_enjoyment,
+    print_solution('DYNAMIC ALGORITHM (cost & time)', dynamic_bothconstraints_enjoyment,
                    dynamic_bothconstraints_solution, time_budget,
                    dynamic_bothconstraints_running_time)
-    print_solution('WIP - GREEDY ALGORITHM (cost only)', greedy_enjoyment, greedy_solution,
-                   time_budget, greedy_running_time)
-    print_solution('WIP - GREEDY ALGORITHM (cost & time)', greedy_bothconstraints_enjoyment,
+    print_solution('GREEDY ALGORITHM (cost & time)', greedy_bothconstraints_enjoyment,
                    greedy_bothconstraints_solution, time_budget,
                    greedy_bothconstraints_running_time)
 

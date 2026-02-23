@@ -54,7 +54,7 @@ def greedy_costonly(total_budget, activities):
     placeholder function
     """
     def get_ratio(activity):
-        return activity["enjoyment"] / activity["cost"]
+        return activity["enjoyment"] / (activity["cost"]/total_budget)
     
     #sort activities by ratio descending
     sorted_activities = merge_sort_activities(activities, get_ratio)
@@ -72,13 +72,13 @@ def greedy_costonly(total_budget, activities):
 
     return total_enjoyment, selected_activities
 
-def greedy_bothconstraints(total_time, total_budget, activities, ratio_weighting=[50,1]):
+def greedy_bothconstraints(total_time, total_budget, activities):
     """
     placeholder function
     """
 
     def get_ratio(activity):
-        return activity["enjoyment"] / (ratio_weighting[0]*activity["time"] + ratio_weighting[1]*activity["cost"])
+        return activity["enjoyment"] / (activity["time"]/total_time) + activity["enjoyment"] / (activity["cost"]/total_budget)
     
     #sort activities by ratio descending
     sorted_activities = merge_sort_activities(activities, get_ratio)

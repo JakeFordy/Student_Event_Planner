@@ -45,23 +45,13 @@ The project folder is set out as follows:
 │   ├── components.py  
 │   ├── dynamic.py  
 │   ├── greedy.py  
-│   └── __init__.py  
-├── documents  
-│   ├── Group_Contribution_Statement.md  
-│   ├── tasks.txt  
-│   └── test_description.txt  
+│   └── __init__.py    
 ├── event_planner.py  
 ├── inputs  
 │   ├── input_large.txt  
 │   ├── input_medium.txt  
 │   └── input_small.txt  
-├── README.md  
-├── Sample Outputs  
-│   ├── benchmark_result_n_32_1000.csv  
-│   ├── Figure_1.png  
-│   ├── Figure_2.png  
-│   ├── Figure_3.png  
-│   └── Figure_4.png  
+├── README.md   
 ├── tests  
 │   ├── benchmark_case_creator.py  
 │   ├── benchmark_graph.py  

@@ -82,8 +82,14 @@ def log_time_vs_n(n_values, bf_med, dp_med):
     plt.style.use("default")
     plt.figure(figsize=(9,6), facecolor="white")
 
-    plt.plot(brute_x, brute_y, marker = "o", markersize = 7, linewidth = 3, color = BRUTE_COLOUR, label = "Brute Force (median)")
-    plt.plot(dynamic_x, dynamic_y, marker = "o", markersize = 7, linewidth = 3, color = DYNAMIC_COLOUR, label = "Dynamic Programming (median)")
+    plt.plot(brute_x, brute_y, marker = "o", markersize = 7,
+             linewidth = 3, color = BRUTE_COLOUR,
+             label = "Brute Force (median)")
+    plt.plot(dynamic_x, dynamic_y, marker = "o", markersize = 7, 
+             linewidth = 3, color = DYNAMIC_COLOUR,
+             label = "Dynamic Programming (median)")
+    
+    
     plt.plot(brute_x, theory_exp_scaled, 
          linewidth=1.5, color = BRUTE_THEORY,
          label = r"Theoretical $2^n$ (scaled)")
@@ -111,14 +117,15 @@ def speedup_chart_logarithmic(n_values, speedup):
             x_vals.append(str(n))
             y_vals.append(s)
 
-    plt.figure()
+    plt.style.use("default")
+    plt.figure(figsize=(9,6), facecolor="white")
 
     plt.bar(x_vals, y_vals)
-
-    plt.title("Speedup Factor in a logarithmic multiplier scale(Brute Force / Dynamic Programming)")
+     
+    plt.title("Speedup Factor (Brute Force / Dynamic Programming)(logarithimic scale)")
     plt.xlabel("n (number of activities)")
     plt.yscale("log")
-    plt.ylabel("Speedup Factor (times in logarithmic scale)")
+    plt.ylabel("Speedup Factor (times, logarithmic scale)")
     plt.grid(True, axis="y", linestyle="--", linewidth=0.5)
     plt.tight_layout()
     plt.show()

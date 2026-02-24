@@ -82,7 +82,7 @@ def generate_random_input(n, seed = 0, case_index = 0):
         lines.append(f"{name_append} {time_append} {cost_append} {enjoyment_append}")
     
     # Create filepath
-    filepath = f"{OUTPUT_DIRECTORY}input_{n}_{case_index}.txt" 
+    filepath = f"{OUTPUT_DIRECTORY}input_{n}_{case_index}.txt"
 
     # Write file to disk    
     Path(filepath).write_text("\n".join(lines) + "\n", encoding = "utf-8")

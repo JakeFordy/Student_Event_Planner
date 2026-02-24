@@ -9,7 +9,7 @@ The generated files:
 - Use approximately 50% of the total available time and cost as constraints
   to avoid creating trivial problem instances.
 
-Generation rules:
+Rules for n:
 - 30 files per n from 2 to 100 (step size = 2)
 - 10 files per n from 110 to 300 (step size = 10)
 - 3 files per n from 350 to 1000 (step size = 50)
@@ -25,18 +25,22 @@ OUTPUT_DIRECTORY = "tests/benchmark_inputs/"
 
 def step_for_n(n):
     """
-    This determines the step between values of n based upon n
+    Steps in a contextually appropriate manner.
+    
+    This determines the step between values of n based upon n.
     """
     if n <= 98:
         return 2
     elif n <= 290:
         return 10
-    else:
+    else: # If n > 290
         return 50
 
 def cases_for_n(n):
     """
-    This determines the number of cases created based upon n
+    Creates a contextually appropriate number of cases.
+
+    This determines the number of cases based upon n.
     """
     if n <= 100:
         return 30
@@ -90,6 +94,8 @@ def generate_random_input(n, seed = 0, case_index = 0):
 def generate_random_input_series(a :int):
     """
     Generate a full benchmark dataset according to predefined rules
+
+    Files are created from n = 2 upto and including a
     """
     n = int(2)
     total_files = 0

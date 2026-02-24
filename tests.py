@@ -1,5 +1,9 @@
 """
-This is a file to combine all tests.
+This file allows easy running of all tests within the test suite.
+
+The Assertion tests are the standard testing to ensure algorithm correctness.
+
+The Benchmark tests are part of the extended performance evaluation. 
 """
 
 import time 
@@ -16,6 +20,7 @@ if __name__ == "__main__":
     print("")
     
     time.sleep(1)
+    # Performs the assertion testing for all cases
     assertion_test_all()
     assertion_test_cost_only()
     assertion_test_both_constraints()
@@ -36,6 +41,7 @@ if __name__ == "__main__":
     print("   the value of n for Dynamic Programming must be greater than or equal to")
     print("   the value chosen for the Bruteforce algorithm.")
     
+    # Loops until a valid input has been given 
     while True:
         try:
             b_input = input("\nMaximum input size of Bruteforce benchmark test (default 20): ")
@@ -44,15 +50,15 @@ if __name__ == "__main__":
             a = int(a_input) if a_input else 1000
             b = int(b_input) if b_input else 20
 
-            if a < b:
+            if a < b: # A must be greater than b due to the greater time complexity of the Bruteforce algorithm
                 print("The input size (n) of the Dynamic Programming must be greater than or")
                 print("equal to that of brute force, please try again.")
                 continue
-
             break 
-        except ValueError:
+        except ValueError: # If an integer is not given
             print("Please enter the values as integers.")
 
+    # Runs the benchmark testing for values a and b
     generate_random_input_series(a)
     benchmark_algorithms(a, b)
     create_graphs()

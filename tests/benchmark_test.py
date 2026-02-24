@@ -1,7 +1,16 @@
 '''
-This file is to implement the testing of the bruteforce and dynamic programming algorithms
+Benchmark Test
 
-Or dynamic_costonly(total_budget, activities)
+This script measures the execution times of the algorithms for an input size n.
+
+Test rules:
+- Brute force is always run on 3 different files of input size n.
+- Dynamic programming is run on a dynamic number of different input files based on the value of n.
+- The test outputs a minimum, median, and maximum value for execution time for each algorithm along
+  with the associated speedup value.
+
+Output directory:
+    tests/benchmark_results/
 '''
 
 from time import perf_counter
@@ -15,7 +24,7 @@ from algorithms.dynamic import dynamic_costonly
 
 INPUT_DIRECTORY = "tests/benchmark_inputs/"
 
-def time_for_bruteforce(filepath: str ) -> float:
+def time_for_bruteforce(filepath: str) -> float:
     """
     Measures the execution time of the bruteforce algorithm for a given file 
     """
@@ -25,7 +34,7 @@ def time_for_bruteforce(filepath: str ) -> float:
     bruteforce_costonly(activities, cost_budget)
     return perf_counter() - start
 
-def time_for_dynamic(filepath: str ) -> float:
+def time_for_dynamic(filepath: str) -> float:
     """
     Measures the execution time of the dynamic programming algorithm for a given file
     """
@@ -37,7 +46,7 @@ def time_for_dynamic(filepath: str ) -> float:
 
 def step_for_n(n):
     """
-    This determines the step between n for each range of values 
+    This determines the step in n for each range of values 
     """
     if n <= 98:
         return 2
@@ -78,7 +87,10 @@ def benchmark_algorithms(a: int, b: int, output_file = "tests/benchmark_results/
     print("\nBenchmarking Brute Force and Dynamic Programming")
     print("n\tBF_min\tBF_med\tBF_max\tDP_min\tDP_med\tDP_max\tSpeedup")
 
+    # Initial value of n
     n = int(2)
+
+    # Steps until n = a
     while n <= a:
         
         # Determine number of cases for each algorithm
@@ -125,6 +137,7 @@ def benchmark_algorithms(a: int, b: int, output_file = "tests/benchmark_results/
             print(f"{n}\t{bf_min:.4f}\t{bf_med:.4f}\t{bf_max:.4f}\t"
                   f"{dp_min:.4f}\t{dp_med:.4f}\t{dp_max:.4f}\t{speedup:.2f}x")
 
+            # Added to results array to be written to CSV
             results.append([
                 n, 
                 bf_min, bf_med, bf_max,
@@ -136,6 +149,7 @@ def benchmark_algorithms(a: int, b: int, output_file = "tests/benchmark_results/
             # So bruteforce is skipped for large n
             print(f"{n}\t-\t-\t-\t{dp_min:.4f}\t{dp_med:.4f}\t{dp_max:.4f}\t-")
 
+            # Added to results array to be written to CSV
             results.append([
                 n,
                 None, None, None,
@@ -143,6 +157,7 @@ def benchmark_algorithms(a: int, b: int, output_file = "tests/benchmark_results/
                 None
             ])
 
+        # Step in n is decided based on the value of n
         n += step_for_n(n)
 
     # Write results to CSV file

@@ -49,7 +49,7 @@ def merge(left, right, get_ratio):
     return merged_arr
 
 
-def greedy_costonly(total_budget, activities):
+def greedy_costonly(activities, total_budget):
     """
     placeholder function
     """
@@ -72,7 +72,7 @@ def greedy_costonly(total_budget, activities):
 
     return total_enjoyment, selected_activities
 
-def greedy_bothconstraints(total_time, total_budget, activities):
+def greedy_bothconstraints(activities, total_time, total_budget):
     """
     placeholder function
     """

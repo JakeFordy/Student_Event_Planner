@@ -16,7 +16,7 @@ we could add this tho by:
 
 """
 
-def dynamic_costonly(total_budget, activities):
+def dynamic_costonly(activities, total_budget):
     """
     docstring
     """
@@ -66,7 +66,7 @@ def dynamic_costonly(total_budget, activities):
 
     return max_enjoyment, selected_activities
 
-def dynamic_bothconstraints(total_time, total_budget, activities):
+def dynamic_bothconstraints(activities, total_time, total_budget):
     """
     docstring
     """

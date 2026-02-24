@@ -31,7 +31,7 @@ EXPECTED_COST_ONLY = {
 }
 
 EXPECTED_BOTH_CONSTRAINTS = {
-    "test_non_optimal.txt": 95,
+    "test_both_considered.txt": 95,
 }
 
 EXPECTED_GREEDY = {
@@ -97,6 +97,9 @@ def assertion_test_all():
     If each test is passed, Pass 'test_file_name' : enjoyment = 'expected'"
     """
 
+    print("\n----- Tests for ALL algorithms -----")
+    print("The following tests test for the key logic within the algorithms.")
+
     for test_file_name, expected in EXPECTED_ALL.items():
         
         path = os.path.join(KNOWN_INPUT_DIRECTORY, test_file_name)
@@ -128,7 +131,7 @@ def assertion_test_all():
         else:
             print(f"-----Some tests FAILED on {test_file_name} (expected enjoyment = {expected})-----")
 
-        time.sleep(3)
+    time.sleep(1)
 
 def assertion_test_cost_only():
     """
@@ -138,6 +141,9 @@ def assertion_test_cost_only():
 
     If each test is passed, Pass 'test_file_name' : enjoyment = 'expected'"
     """
+
+    print("\n----- Tests for COST ONLY algorithms -----")
+    print("The following tests test for adherence to the cost budget.")
 
     for test_file_name, expected in EXPECTED_COST_ONLY.items():
         
@@ -166,7 +172,7 @@ def assertion_test_cost_only():
         else:
             print(f"-----Some tests FAILED on {test_file_name} (expected enjoyment = {expected})-----")
 
-        time.sleep(3)
+    time.sleep(1)
 
 def assertion_test_both_constraints():
     """
@@ -176,6 +182,9 @@ def assertion_test_both_constraints():
 
     If each test is passed, Pass 'test_file_name' : enjoyment = 'expected'"
     """
+
+    print("\n----- Tests for BOTH CONSTRAINTS algorithms -----")
+    print("The following tests test for adherence to both the cost budget and the time budget.")
 
     for test_file_name, expected in EXPECTED_BOTH_CONSTRAINTS.items():
         
@@ -204,7 +213,7 @@ def assertion_test_both_constraints():
         else:
             print(f"-----Some tests FAILED on {test_file_name} (expected enjoyment = {expected})-----")
 
-        time.sleep(3)
+    time.sleep(2)
 
 def assertion_test_greedy():
     """
@@ -214,6 +223,9 @@ def assertion_test_greedy():
 
     If each test is passed, Pass 'test_file_name' : enjoyment = 'expected'"
     """
+
+    print("\n----- Tests for GREEDY algorithms -----")
+    print("The following tests test for adherence to the greedy heuristic logic.")
 
     for test_file_name, expected in EXPECTED_GREEDY.items():
         
@@ -242,4 +254,4 @@ def assertion_test_greedy():
         else:
             print(f"-----Some tests FAILED on {test_file_name} (expected enjoyment = {expected})-----")
 
-        time.sleep(3)
+        time.sleep(2)

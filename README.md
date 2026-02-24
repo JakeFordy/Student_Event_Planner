@@ -3,6 +3,8 @@ Data Structures & Algorithms group coursework for ECM1414
 
 Contains an Event Planner system that calculates and displays the most optimal selection of possible activities, within a given budget (and additionally timeframe) that produces the maximum enjoyment.
 
+Requires NumPy to be installed to run
+
 Algorithms (and constraints considered) included:
 - Bruteforce (cost only)  
 - Bruteforce (cost & time)  

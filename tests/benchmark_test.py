@@ -22,7 +22,7 @@ def time_for_bruteforce(filepath: str ) -> float:
     activities, time_budget, cost_budget = read_from_file(filepath)
 
     start = perf_counter()
-    bruteforce_costonly(0, cost_budget, 0, [], activities)
+    bruteforce_costonly(activities, cost_budget)
     return perf_counter() - start
 
 def time_for_dynamic(filepath: str ) -> float:
@@ -32,7 +32,7 @@ def time_for_dynamic(filepath: str ) -> float:
     activities, time_budget, cost_budget = read_from_file(filepath)
 
     start = perf_counter()
-    dynamic_costonly(cost_budget, activities)
+    dynamic_costonly(activities, cost_budget)
     return perf_counter() - start
 
 def step_for_n(n):

@@ -32,44 +32,42 @@ def solve_bruteforce_costonly(filepath: str) -> int:
     Returns optimal values from bruteforce algorithm
     """
     activities, _, cost_budget = read_from_file(filepath)
-    return bruteforce_costonly(0, cost_budget, 0, [], activities)
+    return bruteforce_costonly(activities, cost_budget)
 
 def solve_dynamic_costonly(filepath: str) -> int:
     """
     Returns optimal values from dynamic programming algorithm
     """
     activities, _, cost_budget = read_from_file(filepath)
-    return dynamic_costonly(cost_budget, activities)
+    return dynamic_costonly(activities, cost_budget)
 
 def solve_bruteforce_bothconstraints(filepath: str) -> int:
     """
     Returns optimal values from bruteforce algorithm
     """
     activities, time_budget, cost_budget = read_from_file(filepath)
-    return bruteforce_bothconstraints(0, time_budget, cost_budget, 0, [], activities)
+    return bruteforce_bothconstraints(activities, time_budget, cost_budget)
 
 def solve_dynamic_bothconstraints(filepath: str) -> int:
     """
     Returns optimal values from dynamic programming algorithm
     """
     activities, time_budget, cost_budget = read_from_file(filepath)
-    return dynamic_bothconstraints(time_budget, cost_budget, activities)
+    return dynamic_bothconstraints(activities, time_budget, cost_budget)
 
 def solve_greedy_costonly(filepath: str) -> int:
     """
     Returns optimal values from dynamic programming algorithm
     """
     activities, _, cost_budget = read_from_file(filepath)
-    return greedy_costonly(cost_budget, activities)
-
-    greedy_costonly(total_budget, activities)
+    return greedy_costonly(activities, cost_budget)
 
 def solve_greedy_bothconstraints(filepath: str) -> int:
     """
     Returns optimal values from dynamic programming algorithm
     """
     activities, time_budget, cost_budget = read_from_file(filepath)
-    return greedy_bothconstraints(time_budget, cost_budget, activities)
+    return greedy_bothconstraints(activities, time_budget, cost_budget)
 
 def best_value(result):
     """

@@ -15,7 +15,7 @@ and a time getter/starter method
 
 from time import time
 from os import getcwd
-import argparse
+from argparse import ArgumentParser
 
 from algorithms.components import read_from_file, print_solution, print_header
 
@@ -52,7 +52,7 @@ def timed_func_run(func, *args):
     return enjoyment, solution, running_time
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="""Data Structures & Algorithms group coursework for ECM1414
+    parser = ArgumentParser(description="""Data Structures & Algorithms group coursework for ECM1414
     Contains an Event Planner system that calculates and displays the most optimal selection of possible activities, 
     within a given budget (and additionally timeframe) that produces the maximum enjoyment.
     By default runs all 3 algorithms and both 1 constraint (cost) and 2 constraints (cost&time)""")

@@ -13,6 +13,9 @@ diffferent ratios:
 - combined_ratio = (enjoyment / cost) + (enjoyment / time)
 """
 
+from algorithms.components import NAME, TIME, COST, ENJOYMENT
+
+
 #sorts by ratio (custom function) descending
 def merge_sort_activities(activities, get_ratio):
     if len(activities) <= 1:
@@ -54,7 +57,7 @@ def greedy_costonly(activities, total_budget):
     placeholder function
     """
     def get_ratio(activity):
-        return activity["enjoyment"] / (activity["cost"]/total_budget)
+        return activity[ENJOYMENT] / (activity[COST]/total_budget)
     
     #sort activities by ratio descending
     sorted_activities = merge_sort_activities(activities, get_ratio)
@@ -65,10 +68,10 @@ def greedy_costonly(activities, total_budget):
 
     #add all top activities that can afford
     for activity in sorted_activities:
-        if activity["cost"] <= remaining_budget:
+        if activity[COST] <= remaining_budget:
             selected_activities.append(activity)
-            remaining_budget -= activity["cost"]
-            total_enjoyment += activity["enjoyment"]
+            remaining_budget -= activity[COST]
+            total_enjoyment += activity[ENJOYMENT]
 
     return total_enjoyment, selected_activities
 
@@ -78,7 +81,7 @@ def greedy_bothconstraints(activities, total_time, total_budget):
     """
 
     def get_ratio(activity):
-        return activity["enjoyment"] / (activity["time"]/total_time) + activity["enjoyment"] / (activity["cost"]/total_budget)
+        return activity[ENJOYMENT] / (activity[TIME]/total_time) + activity[ENJOYMENT] / (activity[COST]/total_budget)
     
     #sort activities by ratio descending
     sorted_activities = merge_sort_activities(activities, get_ratio)
@@ -90,11 +93,11 @@ def greedy_bothconstraints(activities, total_time, total_budget):
 
     #add all top activities that can afford
     for activity in sorted_activities:
-        if activity["time"] <= remaining_time and activity["cost"] <= remaining_budget:
+        if activity[TIME] <= remaining_time and activity[COST] <= remaining_budget:
             selected_activities.append(activity)
 
-            remaining_time -= activity["time"]
-            remaining_budget -= activity["cost"]
-            total_enjoyment += activity["enjoyment"]
+            remaining_time -= activity[TIME]
+            remaining_budget -= activity[COST]
+            total_enjoyment += activity[ENJOYMENT]
 
     return total_enjoyment, selected_activities

@@ -25,6 +25,9 @@ Total Cost: £170
 
 Execution Time: 0.002 seconds
 """
+
+from algorithms.components import TIME, COST, ENJOYMENT
+
 def bruteforce_costonly(activities, budget_left, current_enjoyment=0, current_selection=None, activity_num=0):
     """
     Goes through every possible combination of activities (given within time constraint) 
@@ -55,8 +58,8 @@ def bruteforce_costonly(activities, budget_left, current_enjoyment=0, current_se
 
     #B: Take
     activity = activities[activity_num]
-    take_enjoyment, take_selection = bruteforce_costonly(activities, budget_left - activity["cost"],
-                                                        current_enjoyment + activity["enjoyment"],
+    take_enjoyment, take_selection = bruteforce_costonly(activities, budget_left - activity[COST],
+                                                        current_enjoyment + activity[ENJOYMENT],
                                                         current_selection + [activity],
                                                         activity_num+1)
 
@@ -97,9 +100,9 @@ def bruteforce_bothconstraints(activities, time_left, budget_left, current_enjoy
                                                          current_selection, activity_num+1)
     #B: Take
     activity = activities[activity_num]
-    take_enjoyment, take_selection = bruteforce_bothconstraints(activities, time_left - activity["time"],
-                                                                budget_left - activity["cost"],
-                                                                current_enjoyment + activity["enjoyment"],
+    take_enjoyment, take_selection = bruteforce_bothconstraints(activities, time_left - activity[TIME],
+                                                                budget_left - activity[COST],
+                                                                current_enjoyment + activity[ENJOYMENT],
                                                                 current_selection + [activity],
                                                                 activity_num+1)
 

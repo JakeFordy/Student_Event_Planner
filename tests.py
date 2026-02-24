@@ -40,7 +40,7 @@ if __name__ == "__main__":
             a = int(a_input) if a_input else 1000
             b = int(b_input) if b_input else 20
 
-            if b < a:
+            if a < b:
                 print("The input size (n) of the Dynamic Programming must be greater than or")
                 print("equal to that of brute force, please try again.")
                 continue

@@ -35,7 +35,7 @@ EXPECTED_BOTH_CONSTRAINTS = {
 }
 
 EXPECTED_GREEDY = {
-    "test_local_optimal.txt", 45,
+    "test_local_optimal.txt": 45,
 }
 
 def solve_bruteforce_costonly(filepath: str) -> int:
@@ -215,7 +215,7 @@ def assertion_test_greedy():
     If each test is passed, Pass 'test_file_name' : enjoyment = 'expected'"
     """
 
-    for test_file_name, expected in EXPECTED_BOTH_GREEDY.items():
+    for test_file_name, expected in EXPECTED_GREEDY.items():
         
         path = os.path.join(KNOWN_INPUT_DIRECTORY, test_file_name)
 

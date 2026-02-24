@@ -2,6 +2,10 @@
 add docstrings
 
 """
+NAME = "name"
+TIME = "time"
+COST = "cost"
+ENJOYMENT = "enjoyment"
 
 def read_from_file(filename: str):
     """
@@ -19,10 +23,10 @@ def read_from_file(filename: str):
                 name, time, cost, enjoyment = line.strip().split()
 
                 activities.append({
-                    "name": name,
-                    "time": int(time),
-                    "cost": int(cost),
-                    "enjoyment": int(enjoyment)                
+                    NAME: name,
+                    TIME: int(time),
+                    COST: int(cost),
+                    ENJOYMENT: int(enjoyment)                
                     })
         return activities, int(total_time), int(total_cost)
 
@@ -54,16 +58,25 @@ def print_solution(algo_name: str, enjoyment: int, solution: dict, time_budget: 
     total_cost = 0
 
     for activity in solution:
-        print(f'\t - {activity["name"]} ({activity["time"]} hours, £{activity["cost"]}, enjoyment {activity["enjoyment"]})')
-        total_time += int(activity["time"])
-        total_cost += int(activity["cost"])
+        print(f'\t - {activity[NAME]} ({activity[TIME]} hours, £{activity[COST]}, enjoyment {activity[ENJOYMENT]})')
+        total_time += int(activity[TIME])
+        total_cost += int(activity[COST])
 
     print('\nTotal Enjoyment:', enjoyment)
     print(f'Total Cost: £{total_cost}')
     #if only considering cost constraint, then also display how far over time it took
     if total_time > time_budget:
-        print(f'Total Time Used: {total_time} hours ({total_time-time_budget} hours over)')
+        print(f'Total Time Used: {total_time} hours ({round(total_time-time_budget)} hours over)')
     else:
         print(f'Total Time Used: {total_time} hours')
 
     print('\nExecution Time:', exec_time, 'seconds')
+
+
+def print_header(input_file, time_budget, cost_budget):
+    print('========================================')
+    print('EVENT PLANNER - RESULTS')
+    print('========================================\n')
+    print('Input file:', input_file)
+    print('Available Time:', time_budget, 'hours')
+    print(f'Available Budget: £{cost_budget}')

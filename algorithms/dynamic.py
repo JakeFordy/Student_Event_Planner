@@ -16,7 +16,10 @@ we could add this tho by:
 
 """
 
-def dynamic_costonly(total_budget, activities):
+from algorithms.components import NAME, TIME, COST, ENJOYMENT
+
+
+def dynamic_costonly(activities, total_budget):
     """
     docstring
     """
@@ -33,8 +36,8 @@ def dynamic_costonly(total_budget, activities):
 
     #go through all options and fill table:
     for i in range(1, total_activities+1):
-        activity_cost = activities[i-1]["cost"]
-        activity_enjoyment = activities[i-1]["enjoyment"]
+        activity_cost = activities[i-1][COST]
+        activity_enjoyment = activities[i-1][ENJOYMENT]
 
         for budget_left in range(total_budget+1):
 
@@ -62,11 +65,11 @@ def dynamic_costonly(total_budget, activities):
         if enjoyment_table[i][remaining_budget] != enjoyment_table[i-1][remaining_budget]:
             activity = activities[i-1]
             selected_activities.append(activity)
-            remaining_budget -= activity["cost"]
+            remaining_budget -= activity[COST]
 
     return max_enjoyment, selected_activities
 
-def dynamic_bothconstraints(total_time, total_budget, activities):
+def dynamic_bothconstraints(activities, total_time, total_budget):
     """
     docstring
     """
@@ -86,9 +89,9 @@ def dynamic_bothconstraints(total_time, total_budget, activities):
 
     #go through all options and fill table:
     for i in range(1, total_activities+1):
-        activity_time = activities[i-1]["time"]
-        activity_cost = activities[i-1]["cost"]
-        activity_enjoyment = activities[i-1]["enjoyment"]
+        activity_time = activities[i-1][TIME]
+        activity_cost = activities[i-1][COST]
+        activity_enjoyment = activities[i-1][ENJOYMENT]
 
         for time_left in range(total_time+1):
             for budget_left in range(total_budget+1):
@@ -116,9 +119,9 @@ def dynamic_bothconstraints(total_time, total_budget, activities):
 
     for i in range(total_activities, 0, -1):
         activity = activities[i-1]
-        activity_time = activity["time"]
-        activity_cost = activity["cost"]
-        activity_enjoyment = activity["enjoyment"]
+        activity_time = activity[TIME]
+        activity_cost = activity[COST]
+        activity_enjoyment = activity[ENJOYMENT]
 
         #skip if cost and time are not within boundary (to prevent negative indexing in next lines)
         if remaining_time < activity_time or remaining_budget < activity_cost:
@@ -127,8 +130,8 @@ def dynamic_bothconstraints(total_time, total_budget, activities):
         #if value is same as cell where it wouldve been stored if taken, then the activity was taken (so add it to list)
         if enjoyment_table[i][remaining_time][remaining_budget] == (enjoyment_table[i-1][remaining_time - activity_time][remaining_budget - activity_cost] + activity_enjoyment):
             selected_activities.append(activity)
-            remaining_time -= activity["time"]
-            remaining_budget -= activity["cost"]
+            remaining_time -= activity[TIME]
+            remaining_budget -= activity[COST]
 
     return max_enjoyment, selected_activities
 

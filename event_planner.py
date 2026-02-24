@@ -17,7 +17,7 @@ from time import time
 from os import getcwd
 from argparse import ArgumentParser
 
-from algorithms.components import read_from_file, print_solution, print_header
+from algorithms.components import read_from_file, print_solution, print_header, NAME
 
 from algorithms.bruteforce import bruteforce_bothconstraints, bruteforce_costonly
 from algorithms.dynamic import dynamic_costonly, dynamic_bothconstraints
@@ -44,6 +44,7 @@ ALGORITHMS = {
 
 def timed_func_run(func, *args):
     """
+    add docstring
     """
     start_time = time()
     enjoyment, solution = func(*args)
@@ -52,6 +53,10 @@ def timed_func_run(func, *args):
     return enjoyment, solution, running_time
 
 def parse_args():
+    """
+    add docstring
+    """
+
     parser = ArgumentParser(description="""Data Structures & Algorithms group coursework for ECM1414
     Contains an Event Planner system that calculates and displays the most optimal selection of possible activities, 
     within a given budget (and additionally timeframe) that produces the maximum enjoyment.
@@ -66,7 +71,8 @@ def parse_args():
     parser.add_argument("-g", action="store_true", help="Run greedy heuristic algorithm")
 
     #optional algorithm constraint number (1/2 = cost/cost+time) flags
-    parser.add_argument("-1", dest="v1", action="store_true", help="Use just cost constraint")   #arg name cant be integer, so store as v1/v2 (for 1 and 2)
+    #arg name cant be integer, so store as v1/v2 (for 1 and 2)
+    parser.add_argument("-1", dest="v1", action="store_true", help="Use just cost constraint")
     parser.add_argument("-2", dest="v2", action="store_true", help="Use time and cost constraints")
 
     args = parser.parse_args()
@@ -104,7 +110,7 @@ def perform_algorithms(activities, time_budget, cost_budget, selected_algos, sel
     for algorithm in selected_algos:
         for constraint_num in selected_constraint_nums:
             func = ALGORITHMS[algorithm][constraint_num]
-            algo_title = ALGORITHMS[algorithm]["name"]
+            algo_title = ALGORITHMS[algorithm][NAME]
             try:
                 if constraint_num == 1:
                     enjoyment, solution, running_time = timed_func_run(func, activities, cost_budget)
@@ -118,23 +124,26 @@ def perform_algorithms(activities, time_budget, cost_budget, selected_algos, sel
                 print('\n--- ', algo_title, ' ---')
                 print("Error ocurred while running algorithm")
                 print(e)
-                print("\nExecution Time:', exec_time, 'seconds")
+                print()
 
 
 def main():
     """
+    add docstring
     """
-    input_file, selected_algos, selected_constraint_nums = parse_args()
+    try:
+        input_file, selected_algos, selected_constraint_nums = parse_args()
 
-    activities, time_budget, cost_budget = read_from_file(f'{INPUT_DIRECTORY}{input_file}')
+        activities, time_budget, cost_budget = read_from_file(f'{INPUT_DIRECTORY}{input_file}')
 
-    if len(activities) == 0 or time_budget < 0 or cost_budget < 0:
-        print("Ending program... please check the file you input and try again")
-        return
-    
-    print_header(input_file, time_budget, cost_budget)
-    
-    perform_algorithms(activities, time_budget, cost_budget, selected_algos, selected_constraint_nums)
+        if len(activities) == 0 or time_budget < 0 or cost_budget < 0:
+            print("Ending program... please check the file you input and try again")
+            return
+
+        print_header(input_file, time_budget, cost_budget)
+        perform_algorithms(activities, time_budget, cost_budget, selected_algos, selected_constraint_nums)
+    except KeyboardInterrupt:
+        print('\n...\nProgram exited mid-run\n...\n')
 
 
 if __name__ == '__main__':

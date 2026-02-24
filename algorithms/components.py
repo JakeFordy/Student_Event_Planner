@@ -79,7 +79,7 @@ def print_solution(algo_name: str, enjoyment: int, solution: dict, time_budget: 
     print('\nTotal Enjoyment:', enjoyment)
     print(f'Total Cost: £{total_cost}')
 
-    #if only considering cost constraint, then also display how far over time it took
+    # if only considering cost constraint, then also display how far over time it took
     if total_time > time_budget:
         print(f'Total Time Used: {total_time} hours ({round(total_time-time_budget)} hours over)')
     else:
@@ -88,7 +88,7 @@ def print_solution(algo_name: str, enjoyment: int, solution: dict, time_budget: 
     print('\nExecution Time:', exec_time, 'seconds')
 
 
-def print_header(input_file, time_budget, cost_budget):
+def print_header(input_file: str, time_budget: int, cost_budget: int):
     """
     Prints the starting header for the following outputs,
     including title, input file used, and constraints.

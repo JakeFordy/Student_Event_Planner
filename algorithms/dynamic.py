@@ -11,12 +11,11 @@ also reminder for presentation: that sometimes bruteforce/dynamic might get diff
 this is cuz we not optimising for MINIMAL cost/time, just MAX enj
 we could add this tho by:
 
-...
 
 
 """
 
-from algorithms.components import NAME, TIME, COST, ENJOYMENT
+from algorithms.components import TIME, COST, ENJOYMENT
 
 
 def dynamic_costonly(activities, total_budget):

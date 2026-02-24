@@ -3,7 +3,8 @@ This is a file to combine all tests.
 """
 
 import time 
-from tests.known_tests import assertion_test
+from tests.known_tests import assertion_test_all, assertion_test_cost_only
+from tests.known_tests import assertion_test_both_constraints, assertion_test_greedy
 from tests.benchmark_case_creator import generate_random_input_series
 from tests.benchmark_test import benchmark_algorithms
 from tests.benchmark_graph import create_graphs
@@ -15,7 +16,10 @@ if __name__ == "__main__":
     print("")
     
     time.sleep(1)
-    assertion_test()
+    assertion_test_all()
+    assertion_test_cost_only()
+    assertion_test_both_constraints()
+    assertion_test_greedy()
     
     time.sleep(1)
     print("\n------- Benchmark Tests -------")

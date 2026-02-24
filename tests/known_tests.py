@@ -18,13 +18,24 @@ from algorithms.greedy import greedy_costonly, greedy_bothconstraints
 KNOWN_INPUT_DIRECTORY = "tests/known_inputs"
 
 # Dictionary of the input files paired with the expected enjoyment values
-EXPECTED = {
+EXPECTED_ALL = {
     "test_exact_fit.txt": 55,
-    "test_tradeoff.txt": 110,
-    "test_both_binding.txt": 55,
     "test_unbounded_bug.txt": 10,
     "test_tie.txt": 20,
     "test_none_feasible.txt": 0,
+}
+
+EXPECTED_COST_ONLY = {
+    "test_tradeoff.txt": 110,
+    "test_both_binding.txt": 55,
+}
+
+EXPECTED_BOTH_CONSTRAINTS = {
+    "test_non_optimal.txt": 95,
+}
+
+EXPECTED_GREEDY = {
+    "test_local_optimal.txt", 45,
 }
 
 def solve_bruteforce_costonly(filepath: str) -> int:
@@ -77,7 +88,7 @@ def best_value(result):
         return result[0] 
     return result
 
-def assertion_test():
+def assertion_test_all():
     """
     Implementation of the assertion tests
 
@@ -86,7 +97,7 @@ def assertion_test():
     If each test is passed, Pass 'test_file_name' : enjoyment = 'expected'"
     """
 
-    for test_file_name, expected in EXPECTED.items():
+    for test_file_name, expected in EXPECTED_ALL.items():
         
         path = os.path.join(KNOWN_INPUT_DIRECTORY, test_file_name)
 
@@ -98,6 +109,120 @@ def assertion_test():
         "Dynamic (cost only)": best_value(solve_dynamic_costonly(path)),
         "Bruteforce (both constraints)": best_value(solve_bruteforce_bothconstraints(path)),
         "Dynamic (both constraints)": best_value(solve_dynamic_bothconstraints(path)),
+        "Greedy (cost only)": best_value(solve_greedy_costonly(path)),
+        "Greedy (both constraints)": best_value(solve_greedy_bothconstraints(path)),
+        }
+
+        print("")
+
+        for algorithm, result in results.items():
+            try:
+                assert result == expected, f"expected {expected}, got {result}"
+                print(f"PASS {algorithm} on {test_file_name}: enjoyment = {expected}")
+            except AssertionError as e:
+                all_passed = False
+                print(f"FAIL {algorithm} on {test_file_name}: {e}")
+
+        if all_passed:
+            print(f"-----PASS for all algorithms on {test_file_name}: enjoyment = {expected}-----")
+        else:
+            print(f"-----Some tests FAILED on {test_file_name} (expected enjoyment = {expected})-----")
+
+        time.sleep(3)
+
+def assertion_test_cost_only():
+    """
+    Implementation of the assertion tests
+
+    Compares the enjoyment values output from the algorithms with the known answers
+
+    If each test is passed, Pass 'test_file_name' : enjoyment = 'expected'"
+    """
+
+    for test_file_name, expected in EXPECTED_COST_ONLY.items():
+        
+        path = os.path.join(KNOWN_INPUT_DIRECTORY, test_file_name)
+
+        all_passed = True
+
+        # Checks that the computed solution matches the optimal solution
+        results = {
+        "Bruteforce (cost only)": best_value(solve_bruteforce_costonly(path)),
+        "Dynamic (cost only)": best_value(solve_dynamic_costonly(path)),
+        }
+
+        print("")
+
+        for algorithm, result in results.items():
+            try:
+                assert result == expected, f"expected {expected}, got {result}"
+                print(f"PASS {algorithm} on {test_file_name}: enjoyment = {expected}")
+            except AssertionError as e:
+                all_passed = False
+                print(f"FAIL {algorithm} on {test_file_name}: {e}")
+
+        if all_passed:
+            print(f"-----PASS for all algorithms on {test_file_name}: enjoyment = {expected}-----")
+        else:
+            print(f"-----Some tests FAILED on {test_file_name} (expected enjoyment = {expected})-----")
+
+        time.sleep(3)
+
+def assertion_test_both_constraints():
+    """
+    Implementation of the assertion tests
+
+    Compares the enjoyment values output from the algorithms with the known answers
+
+    If each test is passed, Pass 'test_file_name' : enjoyment = 'expected'"
+    """
+
+    for test_file_name, expected in EXPECTED_BOTH_CONSTRAINTS.items():
+        
+        path = os.path.join(KNOWN_INPUT_DIRECTORY, test_file_name)
+
+        all_passed = True
+
+        # Checks that the computed solution matches the optimal solution
+        results = {
+        "Bruteforce (both constraints)": best_value(solve_bruteforce_bothconstraints(path)),
+        "Dynamic (both constraints)": best_value(solve_dynamic_bothconstraints(path)),
+        }
+
+        print("")
+
+        for algorithm, result in results.items():
+            try:
+                assert result == expected, f"expected {expected}, got {result}"
+                print(f"PASS {algorithm} on {test_file_name}: enjoyment = {expected}")
+            except AssertionError as e:
+                all_passed = False
+                print(f"FAIL {algorithm} on {test_file_name}: {e}")
+
+        if all_passed:
+            print(f"-----PASS for all algorithms on {test_file_name}: enjoyment = {expected}-----")
+        else:
+            print(f"-----Some tests FAILED on {test_file_name} (expected enjoyment = {expected})-----")
+
+        time.sleep(3)
+
+def assertion_test_greedy():
+    """
+    Implementation of the assertion tests
+
+    Compares the enjoyment values output from the algorithms with the known answers
+
+    If each test is passed, Pass 'test_file_name' : enjoyment = 'expected'"
+    """
+
+    for test_file_name, expected in EXPECTED_BOTH_GREEDY.items():
+        
+        path = os.path.join(KNOWN_INPUT_DIRECTORY, test_file_name)
+
+        all_passed = True
+
+        # Checks that the computed solution matches the optimal solution
+        results = {
         "Greedy (cost only)": best_value(solve_greedy_costonly(path)),
         "Greedy (both constraints)": best_value(solve_greedy_bothconstraints(path)),
         }

@@ -74,7 +74,8 @@ def dynamic_bothconstraints(activities, total_time, total_budget):
     docstring
     """
     total_activities = len(activities)
-
+    print("here:")
+    print(len(activities))
     enjoyment_table = []
 
     #create 3d enjoyment table (n+1)x(budget+1)x(time+1) size full of 0s
@@ -109,7 +110,9 @@ def dynamic_bothconstraints(activities, total_time, total_budget):
                 else:
                     enjoyment_table[i][time_left][budget_left] = take_value
 
-
+    print(enjoyment_table[total_activities])
+    print(len(enjoyment_table[total_activities]))
+    print(total_time)
     max_enjoyment = enjoyment_table[total_activities][total_time][total_budget]
 
     #backtrack to return selected activities

@@ -1,86 +1,101 @@
-# ECM1414_Event_Planner
-Data Structures & Algorithms group coursework for ECM1414
+# Student Event Planner
 
-Contains an Event Planner system that calculates and displays the most optimal selection of possible activities, within a given budget (and additionally timeframe) that produces the maximum enjoyment.
+A Python-based event planning tool built for the ECM1414 Data Structures & Algorithms module. Given a list of possible activities, a budget, and an optional time constraint, it finds the optimal selection of activities to maximise enjoyment.
 
-## How to Run and Dependencies:
-The main program **event_planner.py** has no prequisites and can simply be ran in the top directory using:
+## Getting Started
 
-`python event_planner.py input_file.txt`
+### Running the Planner
 
-where input_file.txt should be substituted for an appropriate file that exists within the /inputs folder, such as:
-input_small.txt     input_medium.txt       input_large.txt
+No dependencies required. Run the main script from the root directory:
 
-Optional flag arguments can also be added to run specific algorithms (see *flags*)
+```
+python event_planner.py <input_file>
+```
 
-However, the testing script **tests.py** requires the following dependencies:
-- NumPy
-- Matplotlib
+Replace `<input_file>` with one of the provided input files from the `/inputs` folder:
 
-These can be installed with pip by running:
-`pip install numpy`
-`pip install matplotlib`
+```
+input_small.txt
+input_medium.txt
+input_large.txt
+```
 
-The tests.py script can then be ran in the top directory using:
+You can also pass optional flags to control which algorithm runs (see [Flags](#flags)).
 
-`python tests.py`
+### Running the Tests
 
-Further terminal inputs are take in during runtime.
+The test script requires two additional dependencies:
+
+```
+pip install numpy matplotlib
+```
+
+Then run from the root directory:
+
+```
+python tests.py
+```
+
+Further prompts will appear in the terminal during runtime.
 
 ## Algorithms
-Algorithms (and constraints considered) included:
-- Bruteforce (cost only)  
-- Bruteforce (cost & time)  
-- Dynamic (cost only)  
-- Dynamic (cost & time)  
-- Greedy Heuristic (cost)  
-- Greedy Heuristic (cost & time)  
 
-## Project Folder:
-The project folder is set out as follows:
+Six algorithm variants are included, covering two constraint modes (cost only, or cost + time):
 
-./ECM1414_Event_Planner  
-├── algorithms  
-│   ├── bruteforce.py  
-│   ├── components.py  
-│   ├── dynamic.py  
-│   ├── greedy.py  
-│   └── __init__.py    
-├── event_planner.py  
-├── inputs  
-│   ├── input_large.txt  
-│   ├── input_medium.txt  
-│   └── input_small.txt  
-├── README.md   
-├── tests  
-│   ├── benchmark_case_creator.py  
-│   ├── benchmark_graph.py  
-│   ├── benchmark_inputs  
-│   │   ├── ...  
-│   │   ├── 'all test input txt files'  
-│   │   └──  ...  
-│   ├── benchmark_test.py  
-│   ├── __init__.py  
-│   ├── known_inputs   
-│   │   ├── test_both_binding.txt  
-│   │   ├── test_exact_fit.txt  
-│   │   ├── test_none_feasible.txt  
-│   │   ├── test_tie.txt  
-│   │   ├── test_tradeoff.txt  
-│   │   └── test_unbounded_bug.txt  
-│   └── known_tests.py  
-└── tests.py  
-  
+- Brute Force (cost only)
+- Brute Force (cost & time)
+- Dynamic Programming (cost only)
+- Dynamic Programming (cost & time)
+- Greedy Heuristic (cost only)
+- Greedy Heuristic (cost & time)
+
+## Project Structure
+
+```
+./ECM1414_Event_Planner
+├── algorithms/
+│   ├── bruteforce.py
+│   ├── components.py
+│   ├── dynamic.py
+│   ├── greedy.py
+│   └── __init__.py
+├── inputs/
+│   ├── input_large.txt
+│   ├── input_medium.txt
+│   └── input_small.txt
+├── tests/
+│   ├── benchmark_case_creator.py
+│   ├── benchmark_graph.py
+│   ├── benchmark_inputs/
+│   ├── benchmark_test.py
+│   ├── known_inputs/
+│   │   ├── test_both_binding.txt
+│   │   ├── test_exact_fit.txt
+│   │   ├── test_none_feasible.txt
+│   │   ├── test_tie.txt
+│   │   ├── test_tradeoff.txt
+│   │   └── test_unbounded_bug.txt
+│   ├── known_tests.py
+│   └── __init__.py
+├── event_planner.py
+├── tests.py
+└── README.md
+```
+
 ## Flags
-There are also optional flags which can be typed to choose which specific algorithms to run and with how many constraints (time/cost), using the argparse library:
-  -h, --help  Brings up a help paragraph and description of tags
-  -b          Run bruteforce algorithm
-  -d          Run dynamic algorithm
-  -g          Run greedy heuristic algorithm
-  -1          Use just cost constraint
-  -2          Use time and cost constraints
 
-  For example, to pull up the help description, in the top directory run:
-  `python event_planner.py input_file.txt -h`
+Optional flags can be passed to select specific algorithms and constraint modes:
 
-  
+| Flag | Description |
+|------|-------------|
+| `-h`, `--help` | Show help and flag descriptions |
+| `-b` | Run brute force algorithm |
+| `-d` | Run dynamic programming algorithm |
+| `-g` | Run greedy heuristic algorithm |
+| `-1` | Use cost constraint only |
+| `-2` | Use both cost and time constraints |
+
+Example - show help:
+```
+python event_planner.py <input_file> -h
+```

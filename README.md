@@ -80,7 +80,7 @@ Algorithm and constraint mode can be controlled via flags:
 python event_planner.py input_large.txt -d -2
 ```
 
-**Example** - run all algorithms on only time constraint:
+**Example** - run all algorithms on only cost constraint:
 ```bash
 python event_planner.py input_large.txt -1
 ```
